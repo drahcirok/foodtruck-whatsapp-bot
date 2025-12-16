@@ -1,0 +1,9 @@
+# Dependencias (muy pesadas, no se suben)
+node_modules/
+
+# Variables de entorno (SECRETOS: Nunca subir esto)
+.env
+
+# Archivos de sistema operativo y logs
+.DS_Store
+npm-debug.log
