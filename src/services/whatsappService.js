@@ -1,35 +1,32 @@
+const fs = require('fs');
+const myConsole = new console.Console(fs.createWriteStream('./logs.txt'));
 const twilio = require('twilio');
 
 class WhatsAppService {
     constructor() {
-        // Solo inicializa Twilio si hay credenciales reales
-        if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {
-            this.client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-            this.isConnected = true;
-        } else {
-            console.warn("⚠️ Modo Simulación: No hay credenciales de Twilio.");
-            this.isConnected = false;
-        }
+        this.client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+        this.isConnected = true; 
     }
 
-    async sendMessage(to, body) {
-        // Si estamos en modo simulación, solo imprimimos en consola
-        if (!this.isConnected) {
-            console.log(`🤖 [SIMULACIÓN] Bot responde a ${to}: "${body}"`);
-            return { sid: 'SIMULATED_MESSAGE' };
-        }
-
-        // Si hay credenciales, enviamos de verdad
+    // 🚨 AQUÍ ESTÁ LA MAGIA: Agregamos 'mediaUrl'
+    async sendMessage(to, body, mediaUrl = null) {
         try {
-            const message = await this.client.messages.create({
+            const messageOptions = {
                 from: `whatsapp:${process.env.TWILIO_PHONE_NUMBER}`,
                 to: to,
                 body: body
-            });
-            console.log(`📤 Mensaje enviado a ${to}: ${message.sid}`);
-            return message;
+            };
+
+            // Si nos pasan una foto, la metemos en el paquete
+            if (mediaUrl) {
+                messageOptions.mediaUrl = [mediaUrl];
+            }
+
+            await this.client.messages.create(messageOptions);
+            
+            console.log(`📤 Mensaje enviado a ${to}`);
         } catch (error) {
-            console.error("❌ Error enviando mensaje real:", error);
+            console.error(`🔥 Error enviando mensaje a ${to}:`, error);
         }
     }
 }

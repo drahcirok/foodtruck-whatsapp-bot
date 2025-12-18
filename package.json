@@ -16,7 +16,7 @@
     "foodtruck",
     "nodejs"
   ],
-  "author": "Tu Nombre",
+  "author": "drahcirok",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
