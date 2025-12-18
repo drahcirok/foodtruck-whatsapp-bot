@@ -35,10 +35,7 @@ Este repositorio contiene el código fuente de un **Chatbot de WhatsApp** diseñ
 
 | Menú Principal | Gestión del Carrito |
 |:---:|:---:|
-| <img width="1171" height="787" alt="image" src="https://github.com/user-attachments/assets/f1157dad-ce3e-4a9e-941f-c6a4021b0804" />
- | <img width="1177" height="792" alt="image" src="https://github.com/user-attachments/assets/7b36d427-0e48-4071-98fc-3b9c69e25a05" />
- |
-
+| <img src="https://github.com/user-attachments/assets/f1157dad-ce3e-4a9e-941f-c6a4021b0804" width="300" /> | <img src="https://github.com/user-attachments/assets/7b36d427-0e48-4071-98fc-3b9c69e25a05" width="300" /> |
 ---
 
 ## 🚀 Instalación y Uso
