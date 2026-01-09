@@ -60,4 +60,4 @@ Este repositorio contiene el código fuente de un **Chatbot de WhatsApp** diseñ
     ```
 
 ---
-*Desarrollado con ❤️ por drahcirok*
+*Desarrollado por drahcirok*
