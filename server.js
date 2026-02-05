@@ -2,9 +2,15 @@ require('dotenv').config(); // 1. Cargar variables de entorno primero
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/config/db'); // Importar conexión a DB
+const { replyWithAI } = require("./src/ai/openaiClient");
 
 // 2. Inicializar la Base de Datos
-connectDB();
+if (process.env.MONGODB_URI && process.env.MONGODB_URI.startsWith("mongodb")) {
+  connectDB();
+} else {
+  console.warn("⚠️ MongoDB NO configurado. El servidor seguirá sin base de datos.");
+}
+
 
 const app = express();
 
@@ -21,6 +27,16 @@ app.get('/', (req, res) => {
         status: 'Online',
         timestamp: new Date()
     });
+});
+
+app.get("/ai-test", async (req, res) => {
+  if (process.env.AI_ENABLED !== "true") {
+    return res.status(400).json({ error: "AI_DISABLED" });
+  }
+
+  const q = req.query.q || "Hola, ¿qué vendes hoy?";
+  const ai = await replyWithAI(String(q), "Comandos: MENU, CARRITO, TOTAL, PEDIDO, AYUDA");
+  res.json({ question: q, answer: ai });
 });
 
 // Ruta principal del Chatbot (conecta con lo que hicimos en FASE 2)

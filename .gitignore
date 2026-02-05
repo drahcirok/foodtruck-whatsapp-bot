@@ -3,7 +3,12 @@ node_modules/
 
 # Variables de entorno (SECRETOS: Nunca subir esto)
 .env
+.env.local
+.env.*.local
+logs.txt
+*.log
 
 # Archivos de sistema operativo y logs
 .DS_Store
 npm-debug.log
+

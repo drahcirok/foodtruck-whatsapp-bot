@@ -4,12 +4,27 @@ const twilio = require('twilio');
 
 class WhatsAppService {
     constructor() {
-        this.client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-        this.isConnected = true; 
+        const sid = process.env.TWILIO_ACCOUNT_SID;
+        const token = process.env.TWILIO_AUTH_TOKEN;
+
+        if (sid && token && sid.startsWith("AC")) {
+            this.client = twilio(sid, token);
+            this.isConnected = true;
+        } else {
+            this.client = null;
+            this.isConnected = false;
+            console.warn("⚠️ Twilio NO configurado (SID/TOKEN faltan o inválidos). El servidor seguirá funcionando sin WhatsApp.");
+        }
     }
+
 
     // 🚨 AQUÍ ESTÁ LA MAGIA: Agregamos 'mediaUrl'
     async sendMessage(to, body, mediaUrl = null) {
+        if (!this.client) {
+            console.warn("⚠️ sendMessage llamado pero Twilio no está configurado. No se enviará nada.");
+            return;
+        }
+
         try {
             const messageOptions = {
                 from: `whatsapp:${process.env.TWILIO_PHONE_NUMBER}`,
