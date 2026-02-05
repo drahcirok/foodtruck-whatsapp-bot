@@ -91,10 +91,10 @@ El código sigue una arquitectura modular para facilitar la escalabilidad:
 
 ## 📸 Evidencia de Funcionamiento
 
-| Menú Principal | Gestión del Carrito | Ticket Final |
+| Menú Principal | Gestión del Carrito |
 |:---:|:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/f1157dad-ce3e-4a9e-941f-c6a4021b0804" width="250" /> | <img src="https://github.com/user-attachments/assets/7b36d427-0e48-4071-98fc-3b9c69e25a05" width="250" /> | 
 
 ---
 
-**Desarrollado por:** Richard [Tu Apellido]
+**Desarrollado por:** drahcirok
